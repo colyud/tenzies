@@ -47,8 +47,8 @@ function App() {
 
     return (
         <div className="container">
-            <h2>Tenzies</h2>
-            <p>Roll until all dice are the same. Click each dice to freeze it as its current value between rolls.</p>
+            <h1 className="title">Tenzies</h1>
+            <p className="sub-title">Roll until all dice are the same. Click each dice to freeze it as its current value between rolls.</p>
             <div className="diceContainer">{mappedDice}</div>
             <button className="roll" onClick={handleRoll}>
                 Roll

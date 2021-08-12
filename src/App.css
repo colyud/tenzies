@@ -8,22 +8,28 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-top: 10em;
+    margin-top: 5em;
+}
+.sub-title {
+    max-width: 630px;
+    width: 80%;
+    text-align: center;
 }
 .diceContainer {
     display: grid;
-    gap: 15px;
+    gap: 1em;
     grid-template-areas:
         ". . . . ."
         ". . . . .";
     text-align: center;
     justify-content: center;
-    margin-top: 5em;
+    margin-top: 3em;
 }
 .dice {
     width: 3em;
     height: 3em;
-    font-size: 2rem;
+    font-size: 1rem;
+    font-weight: bold;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -44,4 +50,14 @@ body {
     background-color: dodgerblue;
     border: 0;
     border-radius: 10px;
+}
+@media screen and (min-width: 688px) {
+    .dice {
+        font-size: 1.5rem;
+    }
+}
+@media screen and (min-width: 1000px) {
+    .dice {
+        font-size: 2rem;
+    }
 }
