@@ -4,6 +4,8 @@ import Dice from "./component/Dice";
 
 function App() {
     const [dice, setDice] = React.useState([]);
+    const [isWin, setIsWin] = React.useState(false);
+
     useEffect(() => {
         const newDice = [];
         for (let i = 0; i < 10; i++) {
@@ -31,18 +33,23 @@ function App() {
     }
 
     function handleRoll() {
-        setDice(
-            [...dice].map((obj) => {
-                if (!obj.isHeld) {
-                    return {
-                        ...obj,
-                        number: Math.ceil(Math.random() * 6),
-                    };
-                } else {
-                    return { ...obj };
-                }
-            })
-        );
+        const isAllCheck = !dice.some((e) => e.isHeld === false);
+        if (isAllCheck) {
+            setIsWin(true);
+        } else {
+            setDice(
+                [...dice].map((obj) => {
+                    if (!obj.isHeld) {
+                        return {
+                            ...obj,
+                            number: Math.ceil(Math.random() * 6),
+                        };
+                    } else {
+                        return { ...obj };
+                    }
+                })
+            );
+        }
     }
 
     return (
