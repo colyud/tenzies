@@ -1,10 +1,11 @@
 import React, { useEffect } from "react";
 import "./App.css";
 import Dice from "./component/Dice";
+import Won from "./component/Won";
 
 function App() {
     const [dice, setDice] = React.useState([]);
-    const [isWin, setIsWin] = React.useState(false);
+    const [isWon, setWon] = React.useState(false);
 
     useEffect(() => {
         const newDice = [];
@@ -28,39 +29,42 @@ function App() {
                 ...oldDice[index],
                 isHeld: !oldDice[index].isHeld,
             };
+            const isAllEqual = newDice.every((ele) => ele.number === newDice[0].number);
+            const isAllCheck = !newDice.some((e) => e.isHeld === false);
+            if (isAllCheck && isAllEqual) {
+                setWon(true);
+            }
             return newDice;
         });
     }
 
     function handleRoll() {
-        const isAllCheck = !dice.some((e) => e.isHeld === false);
-        if (isAllCheck) {
-            setIsWin(true);
-        } else {
-            setDice(
-                [...dice].map((obj) => {
-                    if (!obj.isHeld) {
-                        return {
-                            ...obj,
-                            number: Math.ceil(Math.random() * 6),
-                        };
-                    } else {
-                        return { ...obj };
-                    }
-                })
-            );
-        }
+        setDice(
+            [...dice].map((obj) => {
+                if (!obj.isHeld) {
+                    return {
+                        ...obj,
+                        number: Math.ceil(Math.random() * 6),
+                    };
+                } else {
+                    return { ...obj };
+                }
+            })
+        );
     }
 
     return (
-        <div className="container">
-            <h1 className="title">Tenzies</h1>
-            <p className="sub-title">Roll until all dice are the same. Click each dice to freeze it as its current value between rolls.</p>
-            <div className="diceContainer">{mappedDice}</div>
-            <button className="roll" onClick={handleRoll}>
-                Roll
-            </button>
-        </div>
+        <>
+            {isWon && <Won />}
+            <div className="container">
+                <h1 className="title">Tenzies</h1>
+                <p className="sub-title">Roll until all dice are the same. Click each dice to freeze it as its current value between rolls.</p>
+                <div className="diceContainer">{mappedDice}</div>
+                <button className="roll" onClick={handleRoll}>
+                    Roll
+                </button>
+            </div>
+        </>
     );
 }
 
