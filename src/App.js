@@ -69,7 +69,9 @@ function App() {
                 <button className="roll" onClick={handleRoll}>
                     {isWon ? "Play Again" : "Roll"}
                 </button>
-                <p className="credit">@colyud</p>
+                <a href="https://github.com/duyloc22" className="credit">
+                    @duyloc22
+                </a>
             </div>
         </>
     );
