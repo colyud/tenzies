@@ -5,9 +5,9 @@ import Won from "./component/Won";
 
 function App() {
     const [dice, setDice] = React.useState([]);
-    const [isWon, setWon] = React.useState(false);
+    const [isWon, setIsWon] = React.useState(false);
 
-    useEffect(() => {
+    function newDice() {
         const newDice = [];
         for (let i = 0; i < 10; i++) {
             const newNumber = Math.ceil(Math.random() * 6);
@@ -16,8 +16,11 @@ function App() {
                 isHeld: false,
             });
         }
-        // console.log(newDice);
-        setDice(newDice);
+        console.log(newDice);
+        return newDice;
+    }
+    useEffect(() => {
+        setDice(newDice());
     }, []);
 
     const mappedDice = dice.map((ele, index) => <Dice key={index} number={ele.number} isHeld={ele.isHeld} hold={() => holdDice(index)} />);
@@ -32,7 +35,7 @@ function App() {
             const isAllEqual = newDice.every((ele) => ele.number === newDice[0].number);
             const isAllCheck = !newDice.some((e) => e.isHeld === false);
             if (isAllCheck && isAllEqual) {
-                setWon(true);
+                setIsWon(true);
             }
             return newDice;
         });
@@ -51,17 +54,21 @@ function App() {
                 }
             })
         );
+        if (isWon) {
+            setDice(newDice());
+            setIsWon(false);
+        }
     }
 
     return (
         <>
-            {isWon && <Won />}
             <div className="container">
+                {isWon && <Won />}
                 <h1 className="title">Tenzies</h1>
                 <p className="sub-title">Roll until all dice are the same. Click each dice to freeze it as its current value between rolls.</p>
                 <div className="diceContainer">{mappedDice}</div>
                 <button className="roll" onClick={handleRoll}>
-                    Roll
+                    {isWon ? "Play Again" : "Roll"}
                 </button>
             </div>
         </>
