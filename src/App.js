@@ -69,7 +69,7 @@ function App() {
                 <button className="roll" onClick={handleRoll}>
                     {isWon ? "Play Again" : "Roll"}
                 </button>
-                <p className="credit">@locpham</p>
+                <p className="credit">@colyud</p>
             </div>
         </>
     );
