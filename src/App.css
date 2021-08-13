@@ -9,9 +9,11 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-top: 5em;
     position: relative;
     z-index: 0;
+}
+.title {
+    margin-top: 3em;
 }
 .sub-title {
     max-width: 630px;
@@ -56,8 +58,19 @@ body {
     position: relative;
     cursor: pointer;
     z-index: 100;
+    -webkit-box-shadow: 0 5px #ccc;
+    box-shadow: 0 5px #ccc;
+    -moz-box-shadow: 0 5px #ccc;
+}
+.roll:active {
+    box-shadow: 0 0;
+    transform: translateY(5px);
+    -webkit-transform: translateY(5px);
 }
 @media screen and (min-width: 688px) {
+    .title {
+        margin-top: 5em;
+    }
     .dice {
         font-size: 1.5rem;
     }

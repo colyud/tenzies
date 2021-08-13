@@ -16,7 +16,6 @@ function App() {
                 isHeld: false,
             });
         }
-        console.log(newDice);
         return newDice;
     }
     useEffect(() => {
